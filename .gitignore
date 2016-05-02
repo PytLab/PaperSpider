@@ -60,3 +60,7 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# Automatically generated files by scrapy
+lextab.py
+yacctab.py
