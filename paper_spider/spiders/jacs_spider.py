@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 from scrapy import Request
 from scrapy.spider import Spider
 from scrapy.selector import Selector
@@ -28,10 +29,43 @@ class JacsSpider(Spider):
         """
         super(self.__class__, self).__init__()
         self.allowed_domains = ["pubs.acs.org"]
-        self.start_urls = ["http://pubs.acs.org/toc/jacsat/138/16"]
+
+        # Get start urls.
+        self.__get_start_urls()
 
         # Base domain for getting full url.
         self.__base_domain = unicode("http://pubs.acs.org")
+
+    def __get_start_url(self, volume, issue):
+        """
+        Private helper function to get full url from volumn and issue number.
+        """
+        return (u"http://pubs.acs.org/toc/jacsat/" +
+                unicode(volume) + u"/" + unicode(issue))
+
+    def __get_start_urls(self, filename="./jacs_input.txt"):
+        """
+        Private helper function to get start url for spider.
+        """
+        # Check file existance.
+        if os.path.exists(filename):
+            glob, loc = {}, {}
+            execfile(filename, glob, loc)
+            if "volume_issue" not in loc:
+                msg = "'volume_issue' is not supplied in {}.".format(filename)
+                raise ValueError(msg)
+        else:
+            raise IOError("{} is not found.".format(filename))
+
+        # Check data validity.
+        if not loc["volume_issue"]:
+            raise ValueError("No volume and issue data.")
+
+        # Collect start urls.
+        self.start_urls = []
+        for volume, issue in loc["volume_issue"]:
+            start_url = self.__get_start_url(volume, issue)
+            self.start_urls.append(start_url)
 
     def parse(self, response):
         sel = Selector(response)
@@ -89,10 +123,4 @@ class JacsSpider(Spider):
 
         return item
 
-    def __get_start_url(self, volume, issue):
-        """
-        Private helper function to get full url from volumn and issue number.
-        """
-        return (u"http://pubs.acs.org/toc/jacsat/" +
-                unicode(volume) + u"/" + unicode(issue))
 
