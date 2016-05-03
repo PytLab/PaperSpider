@@ -22,18 +22,23 @@ A Python Web Crawler for Paper data crawling powered by [Scrapy](http://scrapy.o
 
 1. 输入文件
     在`/paper_spider`下的`jacs_input.txt`中填入将要爬取的卷号和期刊号。
+
     例如，要爬取卷号为138，期刊号为16 和 卷号为137，期刊号为13的所有文章信息（标题，发表日期，作者，摘要等），如下格式填写输入文件：
+
     ``` python
     # Volume number, issue number
     volume_issue = [(138, 16), (137, 13)]
     ```
 
 2. 开始爬取
+
    在项目的根目录`/paper_spider`执行
    ``` shell
    $ scrapy crawl jacs
    ```
+
    爬取结果会自动保存在`jacs.txt`中。
+
    ![](https://github.com/PytLab/PaperSpider/blob/master/assets/jacs_txt.png)
 
    若想要以不同的格式保存数据：
