@@ -89,10 +89,10 @@ class JacsSpider(Spider):
 
         return item
 
-    def __get_start_url(self, volumn, issue):
+    def __get_start_url(self, volume, issue):
         """
         Private helper function to get full url from volumn and issue number.
         """
         return (u"http://pubs.acs.org/toc/jacsat/" +
-                unicode(volumn) + u"/" + unicode(issue))
+                unicode(volume) + u"/" + unicode(issue))
 
