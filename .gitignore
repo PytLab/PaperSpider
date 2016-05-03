@@ -68,3 +68,8 @@ yacctab.py
 # Vim temp files.
 *.swp
 *.swo
+
+# Data files.
+*.json
+*.csv
+*.txt
