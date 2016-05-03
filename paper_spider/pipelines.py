@@ -50,10 +50,24 @@ class JacsTextWriterPipeline(PaperSpiderPipeline):
             raise DropItem("Duplicate item found: {}".format(item))
 
         # Get content of an item.
-        content = u"="*50 + u"\n"
-        title_string = u"Title: \n" + item["title"] + u"\n"
+        content = u"\n" + u"="*50 + u"\n"
+        split_line = u"-"*30 + u"\n"
+
+        title_string = u"Title: " + item["title"] + u"\n"
+        authors_string = u"Authors: \n" + item["authors"] + u"\n"
+        citation_string = u"Citation: " + item["citation"] + u"\n"
+        url_string = u"URL: " + item["url"] + u"\n"
+        doi_string = u"DOI: " + item["doi"] + u"\n"
+        pub_date_string = u"Publication Date: " + item["pub_date"] + u"\n"
         abstract_string = u"Abstract: \n" + item["abstract"] + u"\n"
-        content += (title_string + abstract_string)
+
+        content += split_line.join([title_string,
+                                    authors_string,
+                                    citation_string,
+                                    url_string,
+                                    doi_string,
+                                    pub_date_string,
+                                    abstract_string])
 
         # Write item content to file.
         with codecs.open(self.__filename, "ab", encoding="utf-8") as f:

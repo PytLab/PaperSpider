@@ -16,6 +16,7 @@ class PaperSpiderItem(Item):
     title = Field()
     url = Field()
     authors = Field()
+    citation = Field()
     pub_date = Field()
     doi = Field()
     abstract = Field()
