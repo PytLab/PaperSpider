@@ -1,6 +1,7 @@
 # *PaperSpider*
 A Python Web Crawler for Paper data crawling powered by [Scrapy](http://scrapy.org/).
-*PaperSpider*是一个用于抓取期刊文章相关信息的爬虫程序，基于[Scrapy](http://scrapy.org)框架编写。
+
+***PaperSpider****是一个用于抓取期刊文章相关信息的爬虫程序，基于[Scrapy](http://scrapy.org)框架编写。
 
 目前支持的期刊:
 - [JACS](http://pubs.acs.org/journal/jacsat)
